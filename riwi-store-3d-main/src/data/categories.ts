@@ -1,0 +1,10 @@
+import type { CategoryId } from '../types/product';
+export const categories: { id: CategoryId; name: string; description: string; number: string }[] = [
+  { id: 'camisetas', name: 'Camisetas', description: 'Tu lenguaje, en una camiseta.', number: '01' },
+  { id: 'hoodies', name: 'Hoodies', description: 'Comodidad para crear sin límites.', number: '02' },
+  { id: 'buzos', name: 'Buzos', description: 'Un básico que siempre vuelve.', number: '03' },
+  { id: 'chaquetas', name: 'Chaquetas', description: 'Estructura técnica para cualquier entorno.', number: '04' },
+  { id: 'accesorios', name: 'Accesorios', description: 'Pequeños detalles. Mucha identidad.', number: '05' },
+  { id: 'clanes', name: 'Clanes', description: 'Edición especial inspirada en los clanes y leyendas de la programación.', number: '06' },
+];
+export const categoryName = (id: CategoryId) => categories.find(category => category.id === id)?.name ?? id;

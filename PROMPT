@@ -1,0 +1,529 @@
+```text
+Actúa como un equipo senior de diseño y desarrollo web formado por un product designer, frontend engineer, especialista en React/TypeScript y desarrollador Three.js. Debes crear desde cero una aplicación web completa, funcional, accesible y visualmente sólida llamada:
+
+RIWI — SYSTEM REBORN
+
+No te limites a proponer un plan: implementa el proyecto, valida el resultado y corrige los problemas encontrados. Comunica los avances y resultados en español.
+
+────────────────────────────────────────
+1. OBJETIVO DEL PRODUCTO
+────────────────────────────────────────
+
+Construye una tienda conceptual de merchandising tecnológico para la comunidad RIWI. La aplicación debe permitir explorar prendas, verlas en 3D, seleccionar variantes, usar un carrito persistente y, como función principal, personalizar una camisa o camiseta con elementos propios.
+
+La experiencia debe sentirse como un estudio creativo tecnológico: elegante, inmersivo, oscuro, moderno y accesible.
+
+La aplicación no debe presentar pagos reales, inventario real, autenticación real ni producción comercial como funcionalidades existentes. Productos, precios, descuentos y disponibilidad son demostrativos.
+
+────────────────────────────────────────
+2. FUNCIÓN PRINCIPAL: PERSONALIZADOR DE CAMISAS
+────────────────────────────────────────
+
+Crea un módulo completo llamado “Custom Lab” o “Personaliza tu prenda”.
+
+El usuario debe poder:
+
+1. Elegir una camisa o camiseta compatible con personalización.
+2. Cambiar el color base de la prenda.
+3. Explorar el modelo 3D mediante arrastre, zoom y vistas predefinidas.
+4. Añadir textos sobre la prenda.
+5. Editar el texto:
+   - Contenido.
+   - Color.
+   - Tamaño.
+   - Tipografía si existen fuentes disponibles.
+   - Posición.
+   - Rotación.
+   - Alineación.
+6. Subir imágenes propias:
+   - PNG, JPG, JPEG y WebP.
+   - Validar tipo y tamaño máximo razonable.
+   - Mostrar errores claros para archivos no admitidos.
+   - Mostrar una vista previa.
+7. Transformar imágenes añadidas:
+   - Mover.
+   - Escalar.
+   - Rotar.
+   - Eliminar.
+8. Seleccionar un elemento existente desde el panel o directamente desde el visor.
+9. Mostrar visualmente cuál es el elemento activo.
+10. Duplicar elementos.
+11. Deshacer y rehacer acciones.
+12. Restablecer el diseño.
+13. Guardar temporalmente el diseño en localStorage.
+14. Recuperar el diseño al recargar la página.
+15. Exportar una vista previa del diseño como imagen cuando sea técnicamente viable.
+16. Mantener la personalización ligada a la superficie de la prenda en el espacio 3D.
+
+La personalización NO debe ser una capa HTML fija encima del canvas. Textos e imágenes deben seguir la prenda al girar la cámara.
+
+Evalúa la geometría, materiales, UV y estructura del modelo 3D antes de decidir la técnica. Usa una solución adecuada, por ejemplo:
+
+- CanvasTexture dinámica aplicada al material de la prenda.
+- Decals de Three.js proyectados sobre la malla.
+- Una combinación de textura dinámica y controles de posicionamiento.
+- Raycasting para determinar la posición de colocación sobre la superficie.
+
+La solución debe cuidar el rendimiento y liberar correctamente texturas, URLs de objetos, geometrías y materiales temporales cuando ya no se necesiten.
+
+────────────────────────────────────────
+3. EXPERIENCIA DE USUARIO
+────────────────────────────────────────
+
+Crea una interfaz de tres áreas en escritorio:
+
+1. Panel izquierdo: biblioteca de elementos.
+   - Botón para añadir texto.
+   - Botón para subir imagen.
+   - Lista de capas o elementos añadidos.
+   - Acciones para seleccionar, duplicar, bloquear y eliminar.
+   - Historial para deshacer y rehacer.
+
+2. Área central: visor 3D.
+   - Modelo de camisa/camiseta.
+   - Fondo de estudio tecnológico.
+   - Controles de cámara.
+   - Indicador de carga del modelo.
+   - Mensaje alternativo cuando WebGL no esté disponible.
+   - Vistas frontal, posterior, lateral izquierda y lateral derecha.
+   - Zoom.
+   - Restablecer cámara.
+   - Opción de giro automático.
+   - Indicador discreto de la zona editable.
+   - Selección visible del elemento activo.
+
+3. Panel derecho: inspector del elemento seleccionado.
+   - Propiedades de texto o imagen.
+   - Color de la prenda.
+   - Posición horizontal y vertical.
+   - Escala.
+   - Rotación.
+   - Opacidad.
+   - Opciones específicas de texto.
+   - Acciones de eliminar, duplicar y centrar.
+
+En móvil, adapta la experiencia a una estructura de paneles o pestañas accesibles:
+
+- Diseño.
+- Elementos.
+- Ajustes.
+- Vista 3D.
+
+Los controles deben conservarse sin saturar la pantalla. El canvas debe ser usable en pantallas táctiles.
+
+────────────────────────────────────────
+4. IDENTIDAD VISUAL
+────────────────────────────────────────
+
+La estética debe pertenecer al universo RIWI SYSTEM REBORN:
+
+- Fondo oscuro con violetas, azul profundo, negro azabache y detalles luminosos.
+- Paneles translúcidos tipo glassmorphism.
+- Tipografía tecnológica, clara y legible.
+- Microinteracciones suaves.
+- Sensación de editor creativo y estudio 3D.
+- Componentes visuales con bordes suaves, luces tenues y detalles de código.
+- La interfaz debe verse profesional tanto en 1440 px como en móvil.
+
+Usa una paleta aproximada:
+
+- Violeta: #A99AFF
+- Azul índigo: #405473
+- Crema: #E8E5DA
+- Negro azabache: #16171D
+- Fondo principal: tonos entre #0B0C16 y #171126
+
+Respeta preferencias de movimiento reducido:
+
+- Desactiva o reduce animaciones decorativas.
+- No bloquees controles esenciales.
+- Evita autoplay agresivo.
+- Suspende renderizados innecesarios fuera de pantalla.
+
+────────────────────────────────────────
+5. TECNOLOGÍAS
+────────────────────────────────────────
+
+Usa este stack:
+
+- React.
+- TypeScript con modo estricto.
+- Vite.
+- React Router.
+- Three.js.
+- React Three Fiber.
+- Drei.
+- Framer Motion cuando aporte valor.
+- CSS propio o Tailwind CSS, manteniendo consistencia.
+- Playwright para pruebas de navegador.
+
+Evita dependencias nuevas si Three.js, React y las herramientas existentes resuelven la necesidad.
+
+Usa rutas hash si el proyecto se desplegará en GitHub Pages.
+
+────────────────────────────────────────
+6. ARQUITECTURA RECOMENDADA
+────────────────────────────────────────
+
+Organiza el proyecto con responsabilidades claras.
+
+Ejemplo de estructura:
+
+src/
+  app/
+    CustomLabPage.tsx
+    CatalogPage.tsx
+    ProductPage.tsx
+    CartPage.tsx
+
+  components/
+    customizer/
+      CustomizerLayout.tsx
+      CustomizerCanvas.tsx
+      CustomizerToolbar.tsx
+      LayerPanel.tsx
+      ElementInspector.tsx
+      TextEditor.tsx
+      ImageUploader.tsx
+      DesignHistory.tsx
+      CustomizerMobileTabs.tsx
+    viewer/
+      ProductViewer.tsx
+      CameraControls.tsx
+      ViewerFallback.tsx
+    ui/
+      Button.tsx
+      IconButton.tsx
+      Modal.tsx
+      EmptyState.tsx
+
+  scenes/
+    GarmentScene.tsx
+    GarmentModel.tsx
+    CustomizationSurface.tsx
+
+  hooks/
+    useCustomizer.ts
+    useDesignHistory.ts
+    useLocalStorage.ts
+    useVisibility.ts
+    useWebGLSupport.ts
+
+  services/
+    designStorage.ts
+    imageValidation.ts
+
+  types/
+    customizer.ts
+    product.ts
+
+  utils/
+    textureCanvas.ts
+    modelHelpers.ts
+    imageHelpers.ts
+    exportDesign.ts
+
+  styles/
+    customizer.css
+    viewer.css
+    globals.css
+
+────────────────────────────────────────
+7. MODELO DE DATOS
+────────────────────────────────────────
+
+Define tipos claros para el personalizador.
+
+Ejemplo:
+
+type CustomElementType = 'text' | 'image';
+
+type CustomElement = {
+  id: string;
+  type: CustomElementType;
+  name: string;
+  visible: boolean;
+  locked: boolean;
+  position: {
+    x: number;
+    y: number;
+    z?: number;
+  };
+  rotation: number;
+  scale: number;
+  opacity: number;
+  createdAt: number;
+  updatedAt: number;
+  text?: {
+    content: string;
+    color: string;
+    fontFamily: string;
+    fontSize: number;
+    fontWeight: number;
+    textAlign: 'left' | 'center' | 'right';
+  };
+  image?: {
+    source: string;
+    fileName: string;
+    width: number;
+    height: number;
+  };
+};
+
+type GarmentDesign = {
+  version: number;
+  productId: string;
+  garmentColor: string;
+  elements: CustomElement[];
+  updatedAt: number;
+};
+
+type HistoryState = {
+  past: GarmentDesign[];
+  present: GarmentDesign;
+  future: GarmentDesign[];
+};
+
+No guardes archivos binarios grandes sin límites. Define un tamaño máximo para imágenes y comunica el error de manera comprensible.
+
+────────────────────────────────────────
+8. REQUISITOS DEL VISOR 3D
+────────────────────────────────────────
+
+El visor debe:
+
+- Cargar modelos GLB o GLTF.
+- Tener soporte para Draco y Meshopt si los modelos lo requieren.
+- Manejar estados loading, ready y error.
+- Mostrar progreso de carga cuando sea posible.
+- No romper si el modelo falla.
+- Ofrecer una alternativa visual y funcional si WebGL no está disponible.
+- Permitir cámara orbital con controles por mouse y táctiles.
+- Limitar zoom y rotación a valores razonables.
+- Cargar el motor 3D bajo demanda si es posible.
+- No cargar modelos pesados desde rutas que no se usan.
+- Liberar recursos Three.js al desmontar componentes.
+- Aplicar cambios de color sobre materiales compatibles.
+- No modificar accidentalmente materiales compartidos entre instancias sin clonarlos cuando sea necesario.
+
+Antes de implementar las personalizaciones, inspecciona:
+
+- Nombre de las mallas.
+- Materiales disponibles.
+- UVs existentes.
+- Orientación de las superficies.
+- Escala del modelo.
+- Partes que deben excluirse, como botones, costuras o accesorios.
+
+La zona de edición debe limitarse a áreas razonables del frente y posterior de la prenda.
+
+────────────────────────────────────────
+9. ACCESIBILIDAD
+────────────────────────────────────────
+
+La aplicación debe cumplir buenas prácticas de accesibilidad:
+
+- Etiquetas visibles o aria-label para todos los controles.
+- Navegación completa por teclado.
+- Foco visible.
+- Modales con foco gestionado.
+- Botones con nombres descriptivos.
+- No depender únicamente del color para comunicar selección o error.
+- Contraste suficiente.
+- Mensajes de estado mediante aria-live.
+- Formularios con mensajes de validación claros.
+- Atajos de teclado documentados si se incluyen.
+- Controles táctiles con áreas de interacción adecuadas.
+
+Incluye, cuando sea posible:
+
+- Ctrl/Cmd + Z: deshacer.
+- Ctrl/Cmd + Shift + Z: rehacer.
+- Delete/Backspace: eliminar elemento seleccionado, evitando conflictos cuando se esté escribiendo en un input.
+- Escape: cerrar diálogos o cancelar una selección activa.
+
+────────────────────────────────────────
+10. CATÁLOGO Y EXPERIENCIA GENERAL
+────────────────────────────────────────
+
+Además del Custom Lab, crea una tienda conceptual con:
+
+- Página de inicio.
+- Catálogo de productos.
+- Categorías.
+- Búsqueda.
+- Filtros por color, talla y colección.
+- Ordenamiento.
+- Ficha de producto.
+- Variantes de talla y color.
+- Galería.
+- Guía de tallas.
+- Visor 3D de producto.
+- Carrito persistente con localStorage.
+- Ajuste de cantidades.
+- Subtotales.
+- Eliminación de productos.
+- Exportación demostrativa de la selección si se desea.
+
+Incluye una entrada destacada hacia el personalizador:
+
+- “Personaliza tu camisa”.
+- “Abrir Custom Lab”.
+- “Diseña tu propia prenda”.
+
+La ruta puede ser:
+
+#/personalizar
+#/custom-lab
+#/producto/:id/personalizar
+
+────────────────────────────────────────
+11. SEGURIDAD Y VALIDACIÓN DE ARCHIVOS
+────────────────────────────────────────
+
+Para carga de imágenes:
+
+- Acepta únicamente image/png, image/jpeg y image/webp.
+- Define un límite de tamaño razonable, por ejemplo 5 MB.
+- Rechaza SVG si no existe una sanitización segura.
+- Muestra mensajes para tipo no permitido, archivo demasiado grande o imagen dañada.
+- Revoca object URLs que ya no se utilicen.
+- Evita insertar HTML del usuario.
+- Trata el texto introducido como texto plano.
+
+No implementes pagos, subida a servidores, cuentas de usuario ni procesamiento externo sin una solicitud explícita.
+
+────────────────────────────────────────
+12. RENDIMIENTO
+────────────────────────────────────────
+
+Optimiza la aplicación para que el editor siga siendo fluido:
+
+- No recrees texturas ni materiales en cada render.
+- Usa memoización donde aporte valor.
+- Actualiza la textura de personalización únicamente cuando cambie el diseño.
+- Reduce resolución de canvas cuando sea adecuado en móvil.
+- Limita el historial de deshacer/rehacer a una cantidad razonable.
+- Suspende animaciones y renderizado cuando el visor no sea visible.
+- Usa carga diferida para vistas 3D pesadas.
+- Evita depender de recursos externos innecesarios.
+- Conserva las imágenes y modelos dentro de public/ cuando sea apropiado.
+
+────────────────────────────────────────
+13. PRUEBAS
+────────────────────────────────────────
+
+Crea pruebas relevantes con Playwright.
+
+Pruebas mínimas del Custom Lab:
+
+1. La ruta del personalizador carga correctamente.
+2. Se puede seleccionar una camisa/camiseta.
+3. El modelo 3D llega al estado ready.
+4. Se puede cambiar el color de la prenda.
+5. Se puede añadir un texto.
+6. Se puede editar el contenido de un texto.
+7. Se puede cambiar el color y tamaño del texto.
+8. Se puede mover, escalar y rotar un texto.
+9. Se puede eliminar un elemento.
+10. Se puede duplicar un elemento.
+11. Deshacer y rehacer actualizan el diseño.
+12. Una imagen PNG válida se carga correctamente.
+13. Un archivo no permitido muestra un error.
+14. Una imagen demasiado grande muestra un error.
+15. La personalización se conserva tras recargar la página.
+16. El diseño se mantiene alineado con la prenda al mover la cámara.
+17. Los controles principales funcionan en móvil.
+18. Sin WebGL aparece una alternativa funcional.
+19. No hay errores de ejecución en consola durante los recorridos principales.
+20. No hay desbordamiento horizontal en rutas importantes.
+
+Ejecuta las pruebas existentes antes de modificar el proyecto para identificar fallos previos. Distingue claramente:
+
+- Pruebas aprobadas.
+- Fallos nuevos.
+- Fallos existentes.
+- Pruebas no ejecutadas.
+
+No desactives aserciones ni alteres pruebas para ocultar defectos.
+
+────────────────────────────────────────
+14. COMANDOS DE VALIDACIÓN
+────────────────────────────────────────
+
+Usa comandos equivalentes a:
+
+npm ci
+npm run typecheck
+npm run build
+npm run dev -- --port 5173 --strictPort
+npm test
+
+Si hay Chromium disponible, úsalo para pruebas con WebGL por software cuando sea necesario.
+
+Antes de realizar builds costosos, verifica:
+
+- Versión de Node.
+- Versión de npm.
+- Dependencias instaladas.
+- Memoria disponible.
+- Configuración de TypeScript.
+- Configuración de Playwright.
+- Estado de Git.
+
+────────────────────────────────────────
+15. REGLAS DE IMPLEMENTACIÓN
+────────────────────────────────────────
+
+1. Inspecciona el repositorio antes de cambiar archivos.
+2. Lee AGENTS.md si existe.
+3. Conserva cambios existentes de otras personas.
+4. No uses git reset --hard ni comandos destructivos.
+5. No cambies lockfiles, dependencias o archivos ajenos sin necesidad.
+6. No crees un worktree salvo petición explícita.
+7. No hagas formateos globales no relacionados.
+8. No ocultes errores de TypeScript.
+9. No afirmes que una funcionalidad funciona sin validarla.
+10. No inventes servicios externos, pagos, usuarios o APIs.
+11. Mantén una experiencia visual coherente con RIWI SYSTEM REBORN.
+12. Implementa código mantenible, tipado y dividido por responsabilidades.
+13. Añade comentarios solamente cuando expliquen una decisión no obvia.
+14. Mantén el idioma español en la interfaz.
+15. Evita texto genérico: usa microcopy claro y relacionado con el contexto creativo.
+
+────────────────────────────────────────
+16. CRITERIOS DE ACEPTACIÓN
+────────────────────────────────────────
+
+El proyecto estará listo cuando:
+
+- La aplicación compile sin errores de TypeScript.
+- El build de producción termine correctamente.
+- La ruta del Custom Lab sea accesible desde la tienda.
+- Una persona pueda personalizar una camisa/camiseta con texto e imágenes.
+- Las personalizaciones se vean sobre el modelo 3D y acompañen la prenda al girar.
+- Se pueda editar, transformar, duplicar y eliminar cada elemento.
+- El diseño se guarde localmente y se recupere tras recargar.
+- Los errores de carga de imágenes sean manejados correctamente.
+- El visor tenga alternativa si WebGL no está disponible.
+- La interfaz funcione en escritorio y móvil.
+- Las pruebas relevantes pasen.
+- No se introduzcan errores de consola en los recorridos principales.
+- Se entregue una explicación breve de cambios, pruebas y limitaciones reales.
+
+────────────────────────────────────────
+17. ENTREGA FINAL
+────────────────────────────────────────
+
+Al terminar, responde en español e indica:
+
+1. Qué puede hacer ahora el usuario.
+2. Qué componentes, rutas, hooks y utilidades se crearon o modificaron.
+3. Cómo se implementó la personalización sobre el modelo 3D.
+4. Qué validaciones y pruebas se ejecutaron.
+5. Resultados exactos de pruebas y compilación.
+6. Limitaciones pendientes, si existen.
+7. Archivos más relevantes para continuar el desarrollo.
+
+No declares que algo está completo si faltan pruebas obligatorias o si la compilación falla.
+```
