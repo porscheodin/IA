@@ -1,0 +1,83 @@
+# Algoritmo de Ordenamiento de Mayor a Menor (Descendente)
+
+## 1. Pseudocódigo (PSeInt / Lógica pura - Método Burbuja)
+Algoritmo OrdenarMayorAMenor
+    Dimension numeros[5]
+    numeros[1] <- 14
+    numeros[2] <- 3
+    numeros[3] <- 89
+    numeros[4] <- 1
+    numeros[5] <- 52
+
+    Para i <- 1 Hasta 4 Hacer
+        Para j <- 1 Hasta 5 - i Hacer
+            Si numeros[j] < numeros[j + 1] Entonces
+                // Intercambiar valores
+                aux <- numeros[j]
+                numeros[j] <- numeros[j + 1]
+                numeros[j + 1] <- aux
+            FinSi
+        FinPara
+    FinPara
+
+    Escribir "Arreglo ordenado de mayor a menor:"
+    Para i <- 1 Hasta 5 Hacer
+        Escribir numeros[i]
+    FinPara
+FinAlgoritmo
+
+
+## 2. Implementación en Python
+
+# --- Opción A: Algoritmo manual (Método Burbuja paso a paso) ---
+def ordenar_mayor_a_menor(lista):
+    n = len(lista)
+    # Copiamos la lista para no modificar la original
+    arr = lista.copy()
+    
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            # Si el elemento actual es MENOR que el siguiente, se intercambian
+            if arr[j] < arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                
+    return arr
+
+# Ejemplo de uso:
+numeros = [14, 3, 89, 1, 52, 27, 89, 5]
+resultado = ordenar_mayor_a_menor(numeros)
+print("Manual (Burbuja):", resultado)
+
+# --- Opción B: Función nativa de Python ---
+resultado_nativo = sorted(numeros, reverse=True)
+print("Nativo:", resultado_nativo)
+
+
+## 3. Implementación en JavaScript / TypeScript
+
+// --- Opción A: Algoritmo manual (Burbuja) ---
+function ordenarMayorAMenor(array) {
+  const arr = [...array];
+  const n = arr.length;
+
+  for (let i = 0; i < n - 1; i++) {
+    for (let j = 0; j < n - i - 1; j++) {
+      // Si el número de la izquierda es menor que el de la derecha, los intercambiamos
+      if (arr[j] < arr[j + 1]) {
+        const aux = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = aux;
+      }
+    }
+  }
+
+  return arr;
+}
+
+// Ejemplo de uso:
+const listaNumeros = [14, 3, 89, 1, 52, 27, 89, 5];
+console.log("Manual:", ordenarMayorAMenor(listaNumeros));
+
+// --- Opción B: Método nativo .sort() ---
+const listaOrdenada = [...listaNumeros].sort((a, b) => b - a);
+console.log("Nativo .sort():", listaOrdenada);
